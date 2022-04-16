@@ -5,18 +5,21 @@ on:
     pull_requests:
       branches: [master]
 jobs:
-  name: 'build'
   build:
     env:
       CI: true
     strategy:
       matrix:
-        os: [linux, windows]
-        node-version: [14, 16]
+        os: [linux]
+        node-version: ['16']
+        mongo-version: [4]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-
+      - name: install mongodb
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongo-version }}
       - name: Install Node ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
