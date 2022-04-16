@@ -1,7 +1,9 @@
 name: Nase Project Ci
 on:
-  push: branches:[master]
-  pull_request: branches [master]
+  push:
+    branches: [master]
+    pull_requests:
+      branches: [master]
 jobs:
   - name: build
     runs-on: ubuntu-latest
